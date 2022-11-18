@@ -7,17 +7,16 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const atob = require("atob");
 const db = require("../config/dbconfig");
-
-router.patch("/edit/:id", async (req, res) => {
+const verify = require("../middleware/auth");
+router.patch("/edit", verify, async (req, res) => {
   try {
-    if (req.body == undefined)
-      return res.status(400).json({
-        success: false,
-        message: "Please fill atleast one field.",
-      });
-
+    const token = req.body.accessToken;
+    console.log(token);
+    const dec = token.split(".")[1];
+    const decode = JSON.parse(atob(dec));
+    console.log(decode.user_create);
     User.findByIdAndUpdate(
-      req.params.id,
+      { _id: decode.user_create },
       {
         $set: req.body,
       },
