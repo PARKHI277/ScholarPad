@@ -3,6 +3,7 @@ const express = require("express");
 require("./config/dbconfig");
 const registerRouter = require("./router/signUp");
 const loginRouter = require("./router/login");
+const editRouter = require("./router/editProfile");
 const cors = require("cors");
 
 const app = express();
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1", registerRouter);
 app.use("/api/v1", loginRouter);
+app.use("/api/v1", editRouter);
 
 const port = process.env.PORT || 3000;
 

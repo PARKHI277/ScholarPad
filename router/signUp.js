@@ -54,7 +54,6 @@ router.post("/signup", async (req, res) => {
         confirmPassword: hashconfirm,
         otpuser: otp,
       });
-      console.log(otp);
 
       if (hashPassword == hashconfirm) {
         const accessToken = jwt.sign(
@@ -65,7 +64,6 @@ router.post("/signup", async (req, res) => {
           }
         );
         emailer(email, otp); //otp sent to the user
-
         user_create
           .save()
           .then(() => {
@@ -82,7 +80,9 @@ router.post("/signup", async (req, res) => {
                 }
               );
             }, 300000);
+
             res.status(201).send({
+              _id: user_create._id,
               message: "Registration successfull and OTP sent",
               userName,
               email,
