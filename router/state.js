@@ -5,15 +5,15 @@ const errorController = require("../controllers/errorController");
 
 router.post("/state", async (req, res, next) => {
   try {
-    const { stateName } = await req.body;
-    const stateExist = await College.findOne({ stateName });
+    const { state } = await req.body;
+    const stateExist = await College.findOne({ state });
 
     if (stateExist) {
       return res.status(200).send({ message: "State already exists." });
     }
 
     const state_create = new State({
-      stateName,
+      state,
     });
 
     const saveState = await state_create.save();
@@ -27,7 +27,7 @@ router.post("/state", async (req, res, next) => {
 router.get("/state", async (req, res) => {
   try {
     const allstates = await State.find().sort({ createdAt: -1 });
-    stateArray = allstates.map((allstate) => allstate.stateName);
+    stateArray = allstates.map((allstate) => allstate.state);
 
     res.status(200).send(stateArray);
   } catch (err) {
