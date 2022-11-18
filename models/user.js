@@ -25,10 +25,7 @@ const UserSchema = new Schema(
       type: String,
       required: [true, "Password is required"],
     },
-    confirmPassword: {
-      type: String,
-      required: [true, "Confirm Passwords is required"],
-    },
+
     isVerified: {
       type: Boolean,
       default: false,

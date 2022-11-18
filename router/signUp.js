@@ -13,10 +13,9 @@ const db = require("../config/dbconfig");
 // user signup
 router.post("/signup", async (req, res) => {
   try {
-    const { userName, email, mobile, password, confirmPassword } =
-      await req.body;
+    const { userName, email, mobile, password } = await req.body;
 
-    if (!userName && !email && !mobile && !password && !confirmPassword)
+    if (!userName && !email && !mobile && !password)
       return res.status(400).json({
         success: false,
         message: "Please fill all the fields",
@@ -32,102 +31,85 @@ router.post("/signup", async (req, res) => {
 
     const strongPasswords =
       /^(?=.*\d)(?=.*[!@#$%^&*-?])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    if (!confirmPassword && Password)
-      return res.status(400).json({
-        success: false,
-        message: "Confirm the password",
-      });
-    else if ((!confirmPassword && !Password) || (confirmPassword && !Password))
-      return res.status(400).json({
-        success: false,
-        message: "Enter password",
-      });
+
     if (strongPasswords.test(Password)) {
       const salt = await bcrypt.genSalt(10);
       const hashPassword = await bcrypt.hash(Password, salt);
-      const hashconfirm = await bcrypt.hash(confirmPassword, salt);
+
       const user_create = new User({
         userName,
         email,
         mobile,
         password: hashPassword,
-        confirmPassword: hashconfirm,
+
         otpuser: otp,
       });
 
-      if (hashPassword == hashconfirm) {
-        const accessToken = jwt.sign(
-          { user_create: user_create._id },
-          process.env.TOKEN_SECRET_KEY,
-          {
-            expiresIn: "1d",
-          }
-        );
-        emailer(email, otp); //otp sent to the user
-        user_create
-          .save()
-          .then(() => {
-            setTimeout(() => {
-              User.findByIdAndUpdate(
-                user_create._id,
-                { $set: { otpuser: null } },
-                function (err, docs) {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    console.log("Updated User : ", docs);
-                  }
+      const accessToken = jwt.sign(
+        { user_create: user_create._id },
+        process.env.TOKEN_SECRET_KEY,
+        {
+          expiresIn: "1d",
+        }
+      );
+      emailer(email, otp); //otp sent to the user
+      user_create
+        .save()
+        .then(() => {
+          setTimeout(() => {
+            User.findByIdAndUpdate(
+              user_create._id,
+              { $set: { otpuser: null } },
+              function (err, docs) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log("Updated User : ", docs);
                 }
-              );
-            }, 300000);
+              }
+            );
+          }, 300000);
 
-            res.status(201).send({
-              _id: user_create._id,
-              message: "Registration successfull and OTP sent",
-              userName,
-              email,
-              mobile,
-              accessToken: `${accessToken}`,
-            });
-          })
-          .catch((err) => {
-            let message;
-            if (err.code === 11000) {
-              // message = err.message;
-              message = "Mobile number already exists";
-              console.log(message);
-            }
-            if (err.name === "ValidationError") {
-              if (
-                err.message ==
-                "User validation failed: email: Email is required"
-              )
-                message = "Email is required";
-              if (
-                err.message ==
-                "User validation failed: userName: username minimum length should be 3"
-              )
-                message = "Username is required";
-              if (
-                err.message ==
-                "User validation failed: mobile: mobile number is required"
-              )
-                message = "Mobile number is required";
-              //message=err.message;
-            }
-            if (err.name === "CastError") message = err.message;
-            if (err.name === "EmptyError") message = err.message;
-            return res.status(400).json({
-              success: false,
-              message: message,
-            });
+          res.status(201).send({
+            _id: user_create._id,
+            message: "Registration successfull and OTP sent",
+            userName,
+            email,
+            mobile,
+            accessToken: `${accessToken}`,
           });
-      } else {
-        res.status(400).send({
-          success: false,
-          message: "Password and confirm password do not match",
+        })
+        .catch((err) => {
+          let message;
+          if (err.code === 11000) {
+            // message = err.message;
+            message = "Mobile number already exists";
+            console.log(message);
+          }
+          if (err.name === "ValidationError") {
+            if (
+              err.message == "User validation failed: email: Email is required"
+            )
+              message = "Email is required";
+            if (
+              err.message ==
+              "User validation failed: userName: username minimum length should be 3"
+            )
+              message = "Username is required";
+            if (
+              err.message ==
+              "User validation failed: mobile: mobile number is required"
+            )
+              message = "Mobile number is required";
+            //message=err.message;
+          }
+          if (err.name === "CastError") message = err.message;
+          if (err.name === "EmptyError") message = err.message;
+          return res.status(400).json({
+            success: false,
+            message: message,
+          });
         });
-      }
     } else {
       res.status(400).send({
         success: false,
