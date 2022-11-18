@@ -21,7 +21,7 @@ router.post("/signin", async (req, res) => {
     return res.status(400).send({ message: "wrong password" });
   } else {
     const accessToken = jwt.sign(
-      { user_create: user_create._id },
+      { user_create: user._id },
       process.env.TOKEN_SECRET_KEY,
       {
         expiresIn: "1d",
