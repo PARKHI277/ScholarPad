@@ -52,6 +52,7 @@ router.post("/signup", async (req, res) => {
           expiresIn: "1d",
         }
       );
+      console.log(accessToken);
       emailer(email, otp); //otp sent to the user
       user_create
         .save()
