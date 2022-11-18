@@ -11,16 +11,12 @@ const atob=require("atob");
 
 router.patch("/list/national/:id",verify, async (req, res) => {
   try {const token = req.body.accessToken;
-  const userId = jwtDecode(token);
-  
-  const { _id } = userId.user._id;
-  console.log(_id);
   const dec =token.split(".")[1];
   const decode = JSON.parse(atob(dec));
   console.log(decode.user_create);
   const nationalId=req.params.id;
    User.findOneAndUpdate(
-      {_id:_id},
+      {_id:decode.user_create},
       {
         $push:{ nationalId:nationalId},
       },
