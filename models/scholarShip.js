@@ -20,6 +20,14 @@ const scholarShipschema = new Schema(
       type: String,
       required: [true, "Apply Url is required"],
     },
+    income: {
+      type: String,
+      required: [true, "Income is required"],
+    },
+    graduate: {
+      type: String,
+      required: [true, "Graduate is required"],
+    },
   },
   { timestamps: true }
 );
