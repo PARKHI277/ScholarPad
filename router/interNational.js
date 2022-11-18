@@ -31,7 +31,6 @@ router.post("/international", async (req, res, next) => {
     const saveScholar = await scholarship_create.save();
     res.status(201).send(saveScholar);
   } catch (err) {
-    console.log(err);
     errorController(err, req, res, next);
   }
 });
