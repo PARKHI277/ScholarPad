@@ -13,7 +13,7 @@ router.post("/national", async (req, res, next) => {
         message: "Please fill all the fields",
       });
 
-    const scholarship_create = new Scholar({
+    const scholarship_create = new National({
       name,
       description,
       lastDate,
