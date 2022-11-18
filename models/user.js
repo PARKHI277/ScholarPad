@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
-  {
+  {nationalId:[{type:Schema.Types.ObjectId,
+  ref:"National"}],
+  internationalId:[{type:Schema.Types.ObjectId,
+    ref:"interScholarShip"}],
     userName: {
       type: String,
       required: [true, "User Name is required"],
@@ -37,6 +40,7 @@ const UserSchema = new Schema(
       type: String,
       default: null,
     },
+    gender:{type:String},
     state: {
       type: String,
       default: null,

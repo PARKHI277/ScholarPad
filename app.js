@@ -4,6 +4,7 @@ require("./config/dbconfig");
 const registerRouter = require("./router/signUp");
 const loginRouter = require("./router/login");
 const editRouter = require("./router/editProfile");
+const listRouter = require("./router/list");
 const collegeRouter = require("./router/college");
 const nationalRouter = require("./router/national");
 const internationalRouter = require("./router/international");
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1", registerRouter);
 app.use("/api/v1", loginRouter);
 app.use("/api/v1", editRouter);
+app.use("/api/v1", listRouter);
 app.use("/api/v1", collegeRouter);
 app.use("/api/v1", nationalRouter);
 app.use("/api/v1", internationalRouter);
