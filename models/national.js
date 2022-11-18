@@ -2,7 +2,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const scholarShipschema = new Schema(
+const nationalSchema = new Schema(
   {
     name: {
       type: String,
@@ -32,5 +32,5 @@ const scholarShipschema = new Schema(
   { timestamps: true }
 );
 
-const scholarShip = new mongoose.model("scholarship", scholarShipschema);
-module.exports = scholarShip;
+const National = new mongoose.model("scholarship", nationalSchema);
+module.exports = National;

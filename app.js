@@ -5,8 +5,8 @@ const registerRouter = require("./router/signUp");
 const loginRouter = require("./router/login");
 const editRouter = require("./router/editProfile");
 const collegeRouter = require("./router/college");
-const scholarRouter = require("./router/scholarShip");
-const interNationalRouter = require("./router/interNational");
+const nationalRouter = require("./router/national");
+const internationalRouter = require("./router/international");
 const cors = require("cors");
 
 const app = express();
@@ -26,8 +26,8 @@ app.use("/api/v1", registerRouter);
 app.use("/api/v1", loginRouter);
 app.use("/api/v1", editRouter);
 app.use("/api/v1", collegeRouter);
-app.use("/api/v1", scholarRouter);
-app.use("/api/v1", interNationalRouter);
+app.use("/api/v1", nationalRouter);
+app.use("/api/v1", internationalRouter);
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

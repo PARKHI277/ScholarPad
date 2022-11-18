@@ -1,9 +1,9 @@
 const express = require("express");
 const router = new express.Router();
-const Scholar = require("../models/interNational");
+const interScholarShip = require("../models/international");
 const errorController = require("../controllers/errorController");
 
-router.post("/interNational", async (req, res, next) => {
+router.post("/international", async (req, res, next) => {
   try {
     const { name, description, lastDate, applyUrl, country, graduate } =
       await req.body;
@@ -20,7 +20,7 @@ router.post("/interNational", async (req, res, next) => {
         message: "Please fill all the fields",
       });
 
-    const scholarship_create = new Scholar({
+    const scholarship_create = new interScholarShip({
       name,
       description,
       lastDate,
@@ -35,5 +35,16 @@ router.post("/interNational", async (req, res, next) => {
     errorController(err, req, res, next);
   }
 });
+router.get("/international", async (req, res) => {
+  try {
+    const internationalData = await interScholarShip
+      .find()
+      .sort({ createdAt: -1 });
 
+    res.status(200).send(internationalData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
 module.exports = router;

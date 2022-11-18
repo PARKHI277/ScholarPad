@@ -1,9 +1,9 @@
 const express = require("express");
 const router = new express.Router();
-const Scholar = require("../models/scholarShip");
+const National = require("../models/national");
 const errorController = require("../controllers/errorController");
 
-router.post("/scholar", async (req, res, next) => {
+router.post("/national", async (req, res, next) => {
   try {
     const { name, description, lastDate, applyUrl, income, graduate } =
       await req.body;
@@ -26,6 +26,17 @@ router.post("/scholar", async (req, res, next) => {
   } catch (err) {
     console.log(err);
     errorController(err, req, res, next);
+  }
+});
+
+router.get("/national", async (req, res) => {
+  try {
+    const nationalData = await National.find().sort({ createdAt: -1 });
+
+    res.status(200).send(nationalData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
   }
 });
 
