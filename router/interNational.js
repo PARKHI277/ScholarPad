@@ -1,13 +1,20 @@
 const express = require("express");
 const router = new express.Router();
-const Scholar = require("../models/scholarShip");
+const Scholar = require("../models/interNational");
 const errorController = require("../controllers/errorController");
 
-router.post("/scholar", async (req, res, next) => {
+router.post("/interNational", async (req, res, next) => {
   try {
-    const { name, description, lastDate, applyUrl, income, graduate } =
+    const { name, description, lastDate, applyUrl, country, graduate } =
       await req.body;
-    if (!name && !description && !lastDate && !applyUrl && !income && !graduate)
+    if (
+      !name &&
+      !description &&
+      !lastDate &&
+      !applyUrl &&
+      !country &&
+      !graduate
+    )
       return res.status(400).json({
         success: false,
         message: "Please fill all the fields",
@@ -18,7 +25,7 @@ router.post("/scholar", async (req, res, next) => {
       description,
       lastDate,
       applyUrl,
-      income,
+      country,
       graduate,
     });
     const saveScholar = await scholarship_create.save();
