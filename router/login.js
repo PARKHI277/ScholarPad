@@ -20,9 +20,14 @@ router.post("/signin", async (req, res) => {
   if (!validpass) {
     return res.status(400).send({ message: "wrong password" });
   } else {
-    let accessToken = jwt.sign({ user }, process.env.TOKEN_SECRET_KEY, {
-      expiresIn: "1d",
-    });
+    const accessToken = jwt.sign(
+      { user_create: user._id },
+      process.env.TOKEN_SECRET_KEY,
+      {
+        expiresIn: "1d",
+      }
+    );
+    console.log(accessToken);
 
     res.status(200).send({
       message: "Login Sucess",
