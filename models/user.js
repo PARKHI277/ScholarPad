@@ -45,7 +45,7 @@ const UserSchema = new Schema(
       default: null,
     },
     dob: {
-      type: string,
+      type: String,
       trim: true,
     },
     category: {
