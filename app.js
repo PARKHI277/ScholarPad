@@ -6,7 +6,7 @@ const loginRouter = require("./router/login");
 const editRouter = require("./router/editProfile");
 const collegeRouter = require("./router/college");
 const nationalRouter = require("./router/national");
-const internationalRouter = require("./router/international");
+const internationalRouter = require("./router/interNational");
 const cors = require("cors");
 
 const app = express();
