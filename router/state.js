@@ -28,7 +28,6 @@ router.get("/state", async (req, res) => {
   try {
     const allstates = await State.find().sort({ createdAt: -1 });
     stateArray = allstates.map((allstate) => allstate.state);
-    console.log(stateArray);
     res.status(200).send(stateArray);
   } catch (err) {
     console.log(err);
