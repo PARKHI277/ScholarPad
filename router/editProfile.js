@@ -10,6 +10,12 @@ const db = require("../config/dbconfig");
 const verify = require("../middleware/auth");
 router.patch("/edit", verify, async (req, res) => {
   try {
+    if (req.body == undefined) {
+      res.status(400).json({
+        success: false,
+        message: "Please fill at least one field to update",
+      });
+    }
     const token = req.body.accessToken;
     console.log(token);
     const dec = token.split(".")[1];
