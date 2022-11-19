@@ -6,27 +6,46 @@ const User = require("../models/user");
 const National = require("../models/national");
 const International = require("../models/international");
 
-//search filter
-router.get("/", async (req, res) => {
-  try {
-    const type = req.query.type;
-    const q = req.query.address.replace(/\s+/g, "");
-    req.query.address = q;
-    // const query=_.mapValues(req.query, _.method('toLowerCase'));
-    const property = await Property.find({
-      $and: [
-        { type },
-        { address: { $regex: req.query.address, $options: "i" } },
-      ],
-    });
-    res.status(200).json(property);
-  } catch (err) {
-    res.status(400).send({
-      success: false,
-      message: err,
-    });
-  }
-});
+// //search filter
+// router.get("/", async (req, res) => {
+//   try {
+//     const type = req.query.type;
+//     const q = req.query.address.replace(/\s+/g, "");
+//     req.query.address = q;
+//     // const query=_.mapValues(req.query, _.method('toLowerCase'));
+//     const property = await Property.find({
+//       $and: [
+//         { type },
+//         { address: { $regex: req.query.address, $options: "i" } },
+//       ],
+//     });
+//     res.status(200).json(property);
+//   } catch (err) {
+//     res.status(400).send({
+//       success: false,
+//       message: err,
+//     });
+//   }
+// });
+// router.get("/nationalfilter", async (req, res) => {
+//   try {
+//     const detail = req.query;
+//     console.log(detail);
+//     // const query=_.mapValues(req.query, _.method('toLowerCase'));
+//     const nationalScholarship = await National.find({
+//       $and: [
+//         { type },
+//         { address: { $regex: req.query.address, $options: "i" } },
+//       ],
+//     });
+//     res.status(200).json(nationalScholarship);
+//   } catch (err) {
+//     res.status(400).send({
+//       success: false,
+//       message: err,
+//     });
+//   }
+// });
 router.get("/filter/national", async (req, res) => {
   try {
     const query = req.query;
