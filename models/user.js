@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
   {
-    nationalId: [{ type: Schema.Types.ObjectId, ref: "National" }],
-    internationalId: [{ type: Schema.Types.ObjectId, ref: "interScholarShip" }],
+    nationalId: [{ type: Schema.Types.ObjectId, ref: "national" }],
+    internationalId: [{ type: Schema.Types.ObjectId, ref: "international" }],
     userName: {
       type: String,
       required: [true, "User Name is required"],

@@ -90,16 +90,23 @@ router.patch("/list/international/:id", verify, async (req, res) => {
   }
 });
 
-router.post("/my-list", async (req, res) => {
+router.post("/mylist", async (req, res) => {
   try {
     const token = req.body.accessToken;
     const dec = token.split(".")[1];
     const decode = JSON.parse(atob(dec));
     console.log(decode.user_create);
     var details = [];
-    const nationalDetails = await User.find({
-      _id: decode.user_create,
-    }).populate("nationalId");
+    const nationalDetails = await User.findById(
+      decode.user_create).populate('nationalId');
+    console.log(nationalDetails.nationalId);
+    details.push(nationalDetails.nationalId);
+    const internationalDetails = await User.findById(
+      decode.user_create).populate('internationalId');
+    console.log(nationalDetails.nationalId);
+    details.push(internationalDetails.internationalId);
+    res.status(200).json(nationalDetails.nationalId);
+
 
     // const nationalDetails = await User.find({
     //   _id: decode.user_create,
