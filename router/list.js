@@ -8,13 +8,16 @@ const jwt = require("jsonwebtoken");
 const db = require("../config/dbconfig");
 const jwtDecode = require("jwt-decode");
 const atob = require("atob");
-
+const emailer = require("../services/email");
 router.patch("/list/national/:id", verify, async (req, res) => {
   try {
     const token = req.body.accessToken;
     const dec = token.split(".")[1];
     const decode = JSON.parse(atob(dec));
-    console.log(decode.user_create);
+
+    const details = await User.findOne({ _id: decode.user_create });
+    const email = details.email;
+    console.log(details.email);
     const nationalId = req.params.id;
     User.findOneAndUpdate(
       { _id: decode.user_create },
@@ -26,6 +29,11 @@ router.patch("/list/national/:id", verify, async (req, res) => {
           console.log(err);
         } else {
           console.log(docs);
+          const subject = "SCHOLARPAD";
+          const text =
+            "Your preffered scholarship has been added to your list. We will send regular updates about this scholarship on your mail";
+
+          emailer(email, text, subject);
           res.status(200).json({
             success: true,
             message: "Scholarship added to preferred lists",
@@ -48,6 +56,8 @@ router.patch("/list/international/:id", verify, async (req, res) => {
     const dec = token.split(".")[1];
     const decode = JSON.parse(atob(dec));
     console.log(decode.user_create);
+    const details = await User.findOne({ _id: decode.user_create });
+    const email = details.email;
     const internationalId = req.params.id;
     User.findOneAndUpdate(
       { _id: decode.user_create },
@@ -59,6 +69,11 @@ router.patch("/list/international/:id", verify, async (req, res) => {
           console.log(err);
         } else {
           console.log(docs);
+          const subject = "SCHOLARPAD";
+          const text =
+            "Your preffered scholarship has been added to your list. We will send regular updates about this scholarship on your mail";
+
+          emailer(email, text, subject);
           res.status(200).json({
             success: true,
             message: "Scholarship added to preferred lists",

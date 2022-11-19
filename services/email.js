@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
-const emailer = function emailer(to, text) {
+const emailer = function emailer(to, text, subject) {
   //function to send email
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -13,8 +13,8 @@ const emailer = function emailer(to, text) {
   const mailOptions = {
     from: process.env.EMAIL,
     to: to,
-    subject: "OTP for email verification",
-    text: "Your OTP is " + text,
+    subject: subject,
+    text: text,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
