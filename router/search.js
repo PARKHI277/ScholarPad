@@ -43,7 +43,6 @@ router.get("/", async (req, res) => {
   router.get("/filter/international", async (req, res) => {
   
     try {
-      const query = _.mapValues(req.query, _.method('toLowerCase'));
       const international = await International.find(req.query).limit(6);
       res.status(200).json(international);
   
