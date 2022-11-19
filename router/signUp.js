@@ -53,7 +53,10 @@ router.post("/signup", async (req, res) => {
         }
       );
       console.log(accessToken);
-      emailer(email, otp); //otp sent to the user
+      const subject = " OTP for email verification";
+      const text = `Your otp is ${otp}`;
+      console.log(text);
+      emailer(email, text, subject); //otp sent to the user
       user_create
         .save()
         .then(() => {
