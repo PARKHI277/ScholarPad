@@ -123,6 +123,7 @@ router.post("/mylist", async (req, res) => {
     res.status(500).send(err);
   }
 });
+
 router.delete("/mylist/:id", async (req, res) => {
   try {
     const token = req.body.accessToken;
@@ -151,4 +152,5 @@ router.delete("/mylist/:id", async (req, res) => {
     res.status(500).send(err);
   }
 });
+
 module.exports = router;
