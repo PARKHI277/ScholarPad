@@ -123,4 +123,32 @@ router.post("/mylist", async (req, res) => {
     res.status(500).send(err);
   }
 });
+router.delete("/mylist/:id", async (req, res) => {
+  try {
+    const token = req.body.accessToken;
+    const { nationalId } = req.params.id;
+    const dec = token.split(".")[1];
+    const decode = JSON.parse(atob(dec));
+    User.updateOne(
+      { _id: decode.user_create },
+      {
+        $pull: {
+          nationalId: req.params.id,
+        },
+      },
+      (err, docs) => {
+        if (!err) {
+          console.log(docs);
+          res.status(200).json({
+            success: true,
+            message: "Scholarship Sucessfully Deleted",
+          });
+        } else console.log(err);
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
 module.exports = router;
