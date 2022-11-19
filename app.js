@@ -9,6 +9,7 @@ const listRouter = require("./router/list");
 const collegeRouter = require("./router/college");
 const nationalRouter = require("./router/national");
 const internationalRouter = require("./router/international");
+const stateRouter = require("./router/state");
 const cors = require("cors");
 
 const app = express();
@@ -32,6 +33,7 @@ app.use("/api/v1", searchRouter);
 app.use("/api/v1", collegeRouter);
 app.use("/api/v1", nationalRouter);
 app.use("/api/v1", internationalRouter);
+app.use("/api/v1", stateRouter);
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
