@@ -5,8 +5,16 @@ const errorController = require("../controllers/errorController");
 
 router.post("/national", async (req, res, next) => {
   try {
-    const { name, description, lastDate, applyUrl, income, graduate } =
-      await req.body;
+    const {
+      name,
+      description,
+      lastDate,
+      applyUrl,
+      income,
+      graduate,
+      state,
+      category,
+    } = await req.body;
     if (!name && !description && !lastDate && !applyUrl && !income && !graduate)
       return res.status(400).json({
         success: false,
@@ -20,6 +28,8 @@ router.post("/national", async (req, res, next) => {
       applyUrl,
       income,
       graduate,
+      state,
+      category,
     });
     const saveScholar = await scholarship_create.save();
     res.status(201).send(saveScholar);

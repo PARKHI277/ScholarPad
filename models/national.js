@@ -28,6 +28,12 @@ const nationalSchema = new Schema(
       type: String,
       required: [true, "Graduate is required"],
     },
+    category: {
+      type: String,
+    },
+    state: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

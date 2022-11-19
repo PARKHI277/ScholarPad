@@ -51,8 +51,6 @@ router.get("/filter/national", async (req, res) => {
     const query = req.query;
     console.log(query);
 
-    console.log(query.income);
-
     const national = await National.find(query).limit(6);
     console.log(national);
     res.status(200).json(national);
