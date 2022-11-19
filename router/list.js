@@ -9,6 +9,8 @@ const db = require("../config/dbconfig");
 const jwtDecode = require("jwt-decode");
 const atob = require("atob");
 const emailer = require("../services/email");
+const national = require("../models/national");
+const international = require("../models/international");
 router.patch("/list/national/:id", verify, async (req, res) => {
   try {
     const token = req.body.accessToken;
@@ -29,6 +31,8 @@ router.patch("/list/national/:id", verify, async (req, res) => {
           console.log(err);
         } else {
           console.log(docs);
+          const scholarshipName = national.findOne({ nationalId });
+          console.log(scholarshipName);
           const subject = "SCHOLARPAD";
           const text =
             "Your preffered scholarship has been added to your list. We will send regular updates about this scholarship on your mail";
@@ -97,16 +101,17 @@ router.post("/mylist", async (req, res) => {
     const decode = JSON.parse(atob(dec));
     console.log(decode.user_create);
     var details = [];
-    const nationalDetails = await User.findById(
-      decode.user_create).populate('nationalId');
+    const nationalDetails = await User.findById(decode.user_create).populate(
+      "nationalId"
+    );
     console.log(nationalDetails.nationalId);
     details.push(nationalDetails.nationalId);
     const internationalDetails = await User.findById(
-      decode.user_create).populate('internationalId');
+      decode.user_create
+    ).populate("internationalId");
     console.log(nationalDetails.nationalId);
     details.push(internationalDetails.internationalId);
     res.status(200).json(nationalDetails.nationalId);
-
 
     // const nationalDetails = await User.find({
     //   _id: decode.user_create,
