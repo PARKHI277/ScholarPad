@@ -139,9 +139,9 @@ router.delete("/mylist/:id", async (req, res) => {
       (err, docs) => {
         if (!err) {
           console.log(docs);
-          res.status(200).json({
+          res.status(200).send({
             success: true,
-            message: "Scholarship Sucessfully Deleted",
+            message: "User Sucessfully Deleted",
           });
         } else console.log(err);
       }
