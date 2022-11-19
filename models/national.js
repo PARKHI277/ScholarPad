@@ -32,5 +32,5 @@ const nationalSchema = new Schema(
   { timestamps: true }
 );
 
-const National = new mongoose.model("scholarship", nationalSchema);
+const National = new mongoose.model("national", nationalSchema);
 module.exports = National;
