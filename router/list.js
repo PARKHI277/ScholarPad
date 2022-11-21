@@ -124,11 +124,14 @@ router.post("/mylist", async (req, res) => {
   }
 });
 
+// id of
 router.delete("/mylist/:id", async (req, res) => {
   try {
-    const token = req.body.accessToken;
+    const token = req.query.accessToken;
+
     const { nationalId } = req.params.id;
     const dec = token.split(".")[1];
+    console.log(dec);
     const decode = JSON.parse(atob(dec));
     User.updateOne(
       { _id: decode.user_create },
