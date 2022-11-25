@@ -37,6 +37,7 @@ const nationalSchema = new Schema(
   },
   { timestamps: true }
 );
+nationalSchema.index({'$**':'text'});
 
 const National = new mongoose.model("national", nationalSchema);
 module.exports = National;
