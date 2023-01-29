@@ -11,9 +11,13 @@ router.get("/search", async (req, res) => {
   try {
     const query = req.query.data;
   
-    const search= await National.find({
+    const search1= await National.find({
     $text:{$search:query}
     });
+    const search2= await International.find({
+      $text:{$search:query}
+      });
+      const search=search1.concat(search2);
     res.status(200).json(search);
   } catch (err) {
     res.status(400).send({
