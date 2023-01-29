@@ -31,7 +31,7 @@ const internationalSchema = new Schema(
   },
   { timestamps: true }
 );
-
+internationalSchema.index({'$**':'text'});
 const interScholarShip = new mongoose.model(
   "international",
   internationalSchema
