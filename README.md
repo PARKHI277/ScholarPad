@@ -7,7 +7,6 @@ ScholarPad is a dynamic web portal developed during the Smart India Hackathon 20
 - **Advanced Filtering and Search:** Employs a robust filtering system based on user profiles for efficient scholarship discovery. Users can search for scholarships using keywords or specific criteria.
 - **Wish List and Updates:** Allows users to add scholarships to their wish list for personalized updates. Regular email notifications about wish-listed scholarships ensure users stay informed and motivated.
 - **Goal-Oriented Notifications:** Provides notifications about scholarship criteria, keeping users motivated and goal-oriented.
-- **Real-Time Data Management:** Ensures the portal is always up-to-date with the latest scholarship information. Minimizes delays in scholarship updates by implementing real-time data management.
 - **Accessibility Profiles:** Vision Impaired Profile enhances accessibility for users with visual impairments. Cognitive Disability Profile includes features to assist users with cognitive disabilities. Seizure Safe Profile ensures a safe browsing experience for users prone to seizures.
 
 ## Future Enhancements
