@@ -1,5 +1,8 @@
 ScholarPad is a dynamic web portal developed during the Smart India Hackathon 2022, designed to centralize information on national and international scholarships. The primary goal is to simplify the scholarship application process for students by providing a unified platform that aggregates diverse scholarship opportunities.
 
+## Video and Presentation
+
+Watch the [ScholarPad Video]([https://your-video-link](https://drive.google.com/file/d/1NWtbl-evO2rUECcAFR6qaMh5_DXgRufV/view?usp=drive_link)) for a visual walkthrough of the portal. Additionally, view the [ScholarPad Presentation]([https://your-presentation-link](https://drive.google.com/file/d/1e4s92jNOytb2sK03Dd6PJ7MTUF89CFW2/view?usp=sharing)) for detailed insights into the project.
 ## Features
 
 - **Unified Scholarship Listings:** Aggregates information from various government, national, and international scholarship sources.
